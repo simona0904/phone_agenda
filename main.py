@@ -1,4 +1,4 @@
-from agenda import add_contact, search_contact
+from agenda import add_contact, delete_contact, search_contact, get_phone_number, contact_exists
 
 
 while True:
@@ -22,10 +22,32 @@ while True:
     elif meniu_ales == 2:  
         litere_introduse = input("Introduceti cateva litere: ")
         nume_gasite = search_contact(litere_introduse)
-        for nume, contor in enumerate(nume_gasite):
-            print(contor + "." + nume)
-        print("0. Revino la meniu.")   
-         
+        while True:
+            for contor, nume in enumerate(nume_gasite, start=1):
+                print(contor, ".", nume)
+            print("0. Revino la meniu.") 
+            contor_ales = int(input("Introduceti un nr corespondent numelui ales: "))
+            if contor_ales == 0:
+                break
+            nume_ales = nume_gasite[contor_ales - 1]
+            numar_tel_ales = get_phone_number(nume_ales)
+            print("+----------------------------+")
+            print("Nume: ", nume_ales)
+            print("Telefon: ", numar_tel_ales)
+            print("+----------------------------+")
+            input("Apasati Enter pt revenire la lista")
+    elif meniu_ales == 3:
+        nume_ales_stergere = input("Numele ales pt stergere: ")
+        if contact_exists(nume_ales_stergere):
+            delete_contact(nume_ales_stergere)
+        else:
+            print("Numele nu exista.")    
+            
+
+
+            
+          
+
 
 
 
